@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/search/search",
+    "pages/resumedemo/resumedemo",
+    "pages/select/select"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor":"#3367D6",
+    "navigationBarTitleText": "简历助手",
+    "navigationBarTextStyle": "white"
+  }
+}
