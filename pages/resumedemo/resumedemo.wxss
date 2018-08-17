@@ -1,0 +1,41 @@
+/* pages/resumedemo/resumedemo.wxss */
+.flex{
+  display: flex;
+}
+.page__title{
+  height:80rpx; padding-top:20rpx;padding-left:40rpx;
+}
+.uneditmsg{
+  display: block;
+  width:90%;
+  
+  border: 1rpx solid #d9d9d9;
+  background-color: white;
+  margin:0 auto;
+}
+.item_1{
+  display: flex;
+  border: 1rpx solid #d9d9d9;
+  justify-content:space-between;
+  padding: 5px 10px;
+
+}
+.item_right{
+  
+}
+.usermotto {
+
+  background-color:  rgb(51, 103, 214);
+  color: white;
+}
+.editmsg{
+width:90%;
+margin: 0 auto;
+border: 1rpx solid #d9d9d9;
+background-color: white;
+
+}
+
+.page{
+ background:  url('http://pic.qiantucdn.com/58pic/20/81/64/74J58PICwtr_1024.jpg!/fw/1024/watermark/url/L2ltYWdlcy93YXRlcm1hcmsvZGF0dS5wbmc=/repeat/true/crop/0x1024a0a0');
+}
