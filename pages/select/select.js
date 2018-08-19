@@ -120,6 +120,8 @@ Page({
   //通过下拉框的条件搜索
   getResumeByTerm:function()
   {
+    var app = getApp();//取得全局App({..})实例
+    app.globalData.resumeCount=0;//取得全局变量需要的值
       wx.request({
         url: 'https://www.yeahempire.com/getResumeByTerm',
         data:{
@@ -143,6 +145,8 @@ Page({
   //通过搜索输入框搜索
   getResumeByQuery :function()
   {
+    var app = getApp();//取得全局App({..})实例
+    app.globalData.resumeCount = 0;//取得全局变量需要的值
       wx.request({
         url: 'https://www.yeahempire.com/getResumeByQuery',
         data:{
@@ -162,9 +166,20 @@ Page({
   },
   previewTodetail :function(e)
   {
-    wx.navigateTo({
-      url: '../resumedemo/resumedemo?id=' + e.currentTarget.id,
-    })
+    var app = getApp();//取得全局App({..})实例
+    app.globalData.resumeCount++;
+    if (app.globalData.resumeCount>=50)
+    {
+      wx.navigateTo({
+        url: '../select/select',
+      }) 
+    }
+    else
+    {
+      wx.navigateTo({
+        url: '../resumedemo/resumedemo?id=' + e.currentTarget.id,
+      })
+    }
   },
 
 listhy: function(e) {

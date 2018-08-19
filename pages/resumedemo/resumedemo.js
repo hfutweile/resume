@@ -1,6 +1,7 @@
 Page({
   data: {
     resume_id:null,
+    resume_details: null,
     showTopTips: false,
     radioItems: [
       { name: 'cell standard', value: '0' },
@@ -26,7 +27,25 @@ Page({
   onLoad : function(options)
   {
       this.setData({
-        resume_id:options.id
+        resume_details: {
+        name: '刘伟乐', sex: '男', age: '23', birth_date: '1970-01-23', addr: '四川', group: '汉族', marry: '未婚', PoliticalStatus: '群众', industry: '酒店/餐饮/快消', position: '餐饮店长', hopeWorkspace: '湖南 长沙 芙蓉区', education: '本科', educationalType: '函授', school: 'xxx大学', major: '工商管理', workYear: '10年', professionalTitle: 'xxxx', registerTime: '2018-08-16', lastViewTime: '2018-08-19'
+        }
+      })
+      wx.request({
+        url: 'https://www.yeahempire.com/getResumeById',
+        data:{
+          resumeId:this.resume_id
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          console.log(res.data)
+          this.setData({
+            resume_details: res.data
+          })
+        }
       })
   },
   bindPickerChange: function (e) {
