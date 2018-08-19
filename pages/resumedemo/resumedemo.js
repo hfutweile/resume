@@ -1,71 +1,6 @@
-// // pages/resumedemo/resumedemo.js
-// Page({
-
-//   /**
-//    * 页面的初始数据
-//    */
-//   data: {
-  
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面加载
-//    */
-//   onLoad: function (options) {
-  
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面初次渲染完成
-//    */
-//   onReady: function () {
-  
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面显示
-//    */
-//   onShow: function () {
-  
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面隐藏
-//    */
-//   onHide: function () {
-  
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面卸载
-//    */
-//   onUnload: function () {
-  
-//   },
-
-//   /**
-//    * 页面相关事件处理函数--监听用户下拉动作
-//    */
-//   onPullDownRefresh: function () {
-  
-//   },
-
-//   /**
-//    * 页面上拉触底事件的处理函数
-//    */
-//   onReachBottom: function () {
-  
-//   },
-
-//   /**
-//    * 用户点击右上角分享
-//    */
-//   onShareAppMessage: function () {
-  
-//   }
-// })
 Page({
   data: {
+    resume_id:null,
     showTopTips: false,
     radioItems: [
       { name: 'cell standard', value: '0' },
@@ -88,7 +23,12 @@ Page({
         array: ['优秀6', '满意2', '一般1', '差3'],
     index: 0,
   },
-
+  onLoad : function(options)
+  {
+      this.setData({
+        resume_id:options.id
+      })
+  },
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({

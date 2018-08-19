@@ -5,7 +5,7 @@
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
           <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="getResumeByQuery"/>
           <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
             <icon type="clear" size="14"></icon>
           </view>
@@ -41,7 +41,7 @@
       <view class="content">学历</view>
       <view class="icon"></view>
     </view>
-    <view class="nav-son borders " bindtap="" data-nav="">
+    <view class="nav-son borders " bindtap="getResumeByTerm" data-nav="">
       <view class="content">搜索</view>
 
     </view>
@@ -49,28 +49,28 @@
 
   <view class="temp temp1 {{hyopen ? 'slidown' : 'slidup'}} {{hyshow ? 'disappear':''}}">
     <view wx:for="{{content}}">
-       <view class=" " data-id="{{index}}" bindtap="tagChoose">
+       <view class=" " data-id="{{index}}" bindtap="tagChoosehy">
                    <text style="{{index == id?'color:#3367D6':'color:gray'}}">{{item.name}}</text>
       </view>
     </view>
   </view>
   <view class="temp temp1 {{xbopen ? 'slidown' : 'slidup'}} {{xbshow ? 'disappear':''}}">
     <view wx:for="{{content}}">
-       <view class=" " data-id="{{index}}" bindtap="tagChoose">
+       <view class=" " data-id="{{index}}" bindtap="tagChoosexb">
                    <text style="{{index == id?'color:#3367D6':'color:gray'}}">{{item.name}}</text>
       </view>
     </view>
   </view>
   <view class="temp temp1 {{nlopen ? 'slidown' : 'slidup'}} {{nlshow ? 'disappear':''}}">
     <view wx:for="{{content}}">
-       <view class=" " data-id="{{index}}" bindtap="tagChoose">
+       <view class=" " data-id="{{index}}" bindtap="tagChoosenl">
                    <text style="{{index == id?'color:#3367D6':'color:gray'}}">{{item.name}}</text>
       </view>
     </view>
   </view>
   <view class="temp temp1 {{xlopen ? 'slidown' : 'slidup'}} {{xlshow ? 'disappear':''}}">
     <view wx:for="{{content}}" >
-      <view class=" " data-id="{{index}}" bindtap="tagChoose">
+      <view class=" " data-id="{{index}}" bindtap="tagChoosexl">
                    <text style="{{index == id?'color:#3367D6':'color:gray'}}">{{item.name}}</text>
       </view>
     </view>
@@ -83,7 +83,19 @@
 
 
 <!--用name 定义模版-->
+<view class="weui-panel__bd" style=''>
+<block wx:for="{{resume}}" wx:for-item="resume_sigle">
+  <navigator url='../resumedemo/resumedemo' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" id="{{resume_sigle.id}}" bindtap='previewTodetail'>
+      <view class="weui-media-box__title">姓名：{{resume_sigle.name}}</view>
+      <view class="weui-media-box__left">联系电话：{{resume_sigle.phone}}</view>
+      <view class="weui-media-box__right">意向岗位：{{resume_sigle.position}}</view>
+    </view>
+  </navigator>
+</block>
+</view>
 
+<!-- 
 <view class="weui-panel__bd" style=''>
   <navigator url="../resumedemo/resumedemo" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
@@ -92,26 +104,6 @@
       <view class="weui-media-box__right">意向岗位：{{position}}</view>
     </view>
   </navigator>
-</view>
+</view> -->
 
-
-
-<view class="weui-panel__bd">
-  <navigator url="../resumedemo/resumedemo" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-      <view class="weui-media-box__title">姓名：{{name}}</view>
-      <view class="weui-media-box__left">联系电话：{{phone}}</view>
-      <view class="weui-media-box__right">意向岗位：{{position}}</view>
-    </view>
-  </navigator>
-</view>
-<view class="weui-panel__bd">
-  <navigator url="../resumedemo/resumedemo" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-      <view class="weui-media-box__title">姓名：{{name}}</view>
-      <view class="weui-media-box__left">联系电话：{{phone}}</view>
-      <view class="weui-media-box__right">意向岗位：{{position}}</view>
-    </view>
-  </navigator>
-</view>
 </view>

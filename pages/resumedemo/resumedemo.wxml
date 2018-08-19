@@ -8,7 +8,7 @@ https://www.jianshu.com/p/f82262002f8a
   <view class='uneditmsg'>
 
     <view class='item_1'>
-      <view>姓名：王小小</view>
+      <view>姓名:{{resume_id}}</view>
       <view class='item_right'>性别：男</view>
     </view>
     <view class='item_1'>

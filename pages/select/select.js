@@ -5,6 +5,7 @@ Page({
     name: "baijiameng",
     phone: "123456",
     position: "whatever",
+    resume: [{ id: 1, name: 'liuweile', phone: '1111', position: 'student' }, { id: 2, name: 'liuweile2', phone: '2222', position: 'student' }],
     content: [],
     hy: [],
     xb: [],
@@ -22,10 +23,15 @@ Page({
     currentItem:0,
     select1: '',
     select2: '',
-    shownavindex: ''
+    shownavindex: '',
+    hyid:-1,
+    xbid:-1,
+    nlid:-1,
+    xlid:-1,
   },
   onLoad: function() {
     this.setData({
+      resume: [{ id: 1, name: 'liuweile', phone: '1111', position: 'student' }, { id: 2, name: 'liuweile2', phone: '2222', position: 'student' }],
       hy: [{ name: '不限' },
       {name:'销售/客服/营销'},
       {name: '财务'},
@@ -62,17 +68,104 @@ Page({
         {name:'研究生'},
         {name: '博士生'},]
     })
+    //根据用户nickname获取可访问的简历
+    var app = getApp();//取得全局App({..})实例
+    var userInfo = app.globalData.userInfo;//取得全局变量需要的值
+    wx.request({
+      url: 'https://www.yeahempire.com/getResume',
+      data:{
+        username:userInfo.nickName
+      },
+      method:'POST',
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res.data)
+        this.setData({
+          resume:res.data
+        })
+      }
+    })
   },
 
-  tagChoose: function (e) {
+  tagChoosehy: function (e) {
     var ids = e.currentTarget.dataset.id;  //获取自定义的id   
     this.setData({
-      id: ids  //把获取的自定义id赋给当前组件的id(即获取当前组件)  
+      id: ids,
+      hyid: ids  //把获取的自定义id赋给当前组件的id(即获取当前组件)  
     })
-
-
   },
-
+  tagChoosexb: function (e) {
+    var ids = e.currentTarget.dataset.id;  //获取自定义的id   
+    this.setData({
+      id: ids,
+      xbid: ids  //把获取的自定义id赋给当前组件的id(即获取当前组件)  
+    })
+  },
+  tagChoosenl: function (e) {
+    var ids = e.currentTarget.dataset.id;  //获取自定义的id   
+    this.setData({
+      id: ids,
+      nlid: ids  //把获取的自定义id赋给当前组件的id(即获取当前组件)  
+    })
+  },
+  tagChoosexl: function (e) {
+    var ids = e.currentTarget.dataset.id;  //获取自定义的id   
+    this.setData({
+      xlid: ids,  //把获取的自定义id赋给当前组件的id(即获取当前组件)  
+      id:ids
+    })
+  },
+  //通过下拉框的条件搜索
+  getResumeByTerm:function()
+  {
+      wx.request({
+        url: 'https://www.yeahempire.com/getResumeByTerm',
+        data:{
+          industry:this.hyid,
+          sex:this.xbid,
+          age:this.nlid,
+          education:this.xlid
+        },
+        method:'POST',
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          console.log(res.data)
+          this.setData({
+            resume: res.data
+          })
+        }
+      })
+  },
+  //通过搜索输入框搜索
+  getResumeByQuery :function()
+  {
+      wx.request({
+        url: 'https://www.yeahempire.com/getResumeByQuery',
+        data:{
+          query: this.inputVal
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          console.log(res.data)
+          this.setData({
+            resume: res.data
+          })
+        }
+      })
+  },
+  previewTodetail :function(e)
+  {
+    wx.navigateTo({
+      url: '../resumedemo/resumedemo?id=' + e.currentTarget.id,
+    })
+  },
 
 listhy: function(e) {
   if (this.data.hyopen) {
@@ -216,8 +309,6 @@ hidebg: function(e) {
     shownavindex: 0
   })
 },
-
-
 showInput: function() {
   this.setData({
     inputShowed: true
