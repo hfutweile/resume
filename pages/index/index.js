@@ -4,18 +4,44 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
   gotoSearchPage: function(){
+    //如果是非vip，则
+    if (wx.getStorageSync('isVip')==false)
+    {
+      wx.request({
+        url: 'https://www.yeahempire.com/getIsVip',
+        data:{
+          openid:wx.getStorageSync('isVip')
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/json'
+        },
+        success : function(res){
+          if (res.statusCode == 200) {
+            wx.setStorageSync('isVip', res.data.isVip)
+          }
+        }
+      })
+    }
     wx.navigateTo({
       url: '../select/select',
     })
   },
   onLoad: function () {
+    if(wx.getStorageSync('isVip')==false)
+    {
+      //显示输入框
+    }
+    else if(wx.getStorageSync('isVip'))
+    {
+      //隐藏输入框
+    }
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

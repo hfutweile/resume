@@ -1,5 +1,6 @@
 Page({
   data: {
+    openid:null,
     inputShowed: false,
     inputVal: "",
     name: "baijiameng",
@@ -71,10 +72,12 @@ Page({
     //根据用户nickname获取可访问的简历
     var app = getApp();//取得全局App({..})实例
     var userInfo = app.globalData.userInfo;//取得全局变量需要的值
+    var openid = wx.getStorageSync('openid')
+    console.log('select storage page openid:' + openid)
     wx.request({
       url: 'https://www.yeahempire.com/getResume',
       data:{
-        username:userInfo.nickName
+        username: wx.getStorageSync('openid')
       },
       method:'POST',
       header: {
