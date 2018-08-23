@@ -10,21 +10,23 @@ Page({
   },
   //事件处理函数
   gotoSearchPage: function(){
-    //如果是非vip，则
-    if (wx.getStorageSync('isVip')==false)
-    {
+    //如果不是VIP用户
+    if (wx.getStorageSync('isVip') == false) {
+      //获取用户输入电话号码,从输入框中获取
+      var Tel=''
       wx.request({
-        url: 'https://www.yeahempire.com/getIsVip',
+        url: 'https://www.yeahempire.com/setOpenidByTel',
         data:{
-          openid:wx.getStorageSync('isVip')
+          openid:wx.getStorageSync('openid'),
+          tel:Tel
         },
-        method: 'POST',
         header: {
-          'content-type': 'application/json'
+          'content-type': 'json'
         },
-        success : function(res){
-          if (res.statusCode == 200) {
-            wx.setStorageSync('isVip', res.data.isVip)
+        success:function(res){
+          if(res.statusCode==200)
+          {
+            wx.setStorageSync('isVip', res.data.status)
           }
         }
       })

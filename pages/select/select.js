@@ -128,6 +128,7 @@ Page({
       wx.request({
         url: 'https://www.yeahempire.com/getResumeByTerm',
         data:{
+          openid:wx.getStorageSync('openid'),
           industry:this.hyid,
           sex:this.xbid,
           age:this.nlid,
@@ -153,6 +154,7 @@ Page({
       wx.request({
         url: 'https://www.yeahempire.com/getResumeByQuery',
         data:{
+          openid: wx.getStorageSync('openid'),
           query: this.inputVal
         },
         method: 'POST',
@@ -179,6 +181,7 @@ Page({
     }
     else
     {
+      getApp().globalData.resumeId = e.currentTarget.id,
       wx.navigateTo({
         url: '../resumedemo/resumedemo?id=' + e.currentTarget.id,
       })

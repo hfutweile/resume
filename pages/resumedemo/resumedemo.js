@@ -26,15 +26,19 @@ Page({
   },
   onLoad : function(options)
   {
+      //获取上一个页面传值
+      var resumeID=options.id
       this.setData({
         resume_details: {
         name: '刘伟乐', sex: '男', age: '23', birth_date: '1970-01-23', addr: '四川', group: '汉族', marry: '未婚', PoliticalStatus: '群众', industry: '酒店/餐饮/快消', position: '餐饮店长', hopeWorkspace: '湖南 长沙 芙蓉区', education: '本科', educationalType: '函授', school: 'xxx大学', major: '工商管理', workYear: '10年', professionalTitle: 'xxxx', registerTime: '2018-08-16', lastViewTime: '2018-08-19'
         }
       })
+    console.log("resumedemo resumeId:" + getApp().globalData.resumeId)
       wx.request({
         url: 'https://www.yeahempire.com/getResumeById',
         data:{
-          resumeId:this.resume_id
+          resumeId: getApp().globalData.resumeId
+          //resumeId:resumeID
         },
         method: 'POST',
         header: {

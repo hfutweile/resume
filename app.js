@@ -1,19 +1,6 @@
 //app.js
 App({
   onLaunch: function () {
-    var that = this
-    if (wx.getStorageSync('isVip')==false)
-    {
-      console.log('isVip:false')
-    }
-    else if (wx.getStorageSync('isVip') == true)
-    {
-      console.log('isVip:true')
-    }
-    else
-    {
-        wx.setStorageSync('isVip', false)
-    }
     // 展示本地存储能力
     // var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
@@ -38,20 +25,26 @@ App({
             if (res.statusCode == 200) {
               console.log("获取到的openid为：" + res.data.openid)
               wx.setStorageSync('openid', res.data.openid)
+              //判断用户是否是vip
+              wx.request({
+                url: 'https://www.yeahempire.com/getVipByOpenId',
+                data:{
+                  openid: res.data.openid
+                },
+                header: {
+                  'content-type': 'json'
+                },
+                success:function(res){
+                  if (res.statusCode==200){
+                    wx.setStorageSync('isVip', res.data.isVip)
+                  }
+                }
+              })
             }
-            // var ID = res.data.openid;
-            // //that.globalData.openId = ID;
-            // //console.log('that.globalData.openId' + that.globalData.openId)
-            // if (res.data.status == true) {
-            //   var ID = res.data.openid;
-            //   that.globalData.openId = ID;
-            //   console.log('that.globalData.openId' + that.globalData.openId)
-            // }
           }
         })
       }
     })
-
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -77,5 +70,6 @@ App({
     userInfo: null,
     resumeCount:0,
     openId:null,
+    resumeId:0,
   }
 })
