@@ -181,7 +181,7 @@ Page({
     }
     else
     {
-      getApp().globalData.resumeId = e.currentTarget.id,
+      getApp().globalData.resumeId = e.currentTarget.id;
       wx.navigateTo({
         url: '../resumedemo/resumedemo?id=' + e.currentTarget.id,
       })
