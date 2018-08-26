@@ -1,0 +1,56 @@
+输出传输：POST,参数名为每个函数的输入参数
+
+url:https://www.yeahempire.com/setOpenidByTel
+函数名：setOpenidByUsername
+函数功能：根据用户输入电话号码绑定openid
+参数：openid（微信用户唯一标识）,tel（后台用户唯一标识字段）
+返回：status(true or false)
+
+url:https://www.yeahempire.com/getVipByOpenId
+函数名：getVipByOpenId
+函数功能：根据openid判断用户是够是付费用户
+参数：openid（微信用户唯一标识）
+返回：isVip(是否是vip)
+
+url:https://www.yeahempire.com/getResume
+函数名：getResume
+函数功能：根据用户唯一标识获取初始展示的简历列表
+参数：openid（或者其他一些唯一标识用户的字段）
+返回：isVip(是否是vip),resumeId(简历唯一标识)，name（简历人姓名），tel(联系电话)，hopePosition(意向岗位)
+
+url:https://www.yeahempire.com/getResumeByTerm
+函数名：getResumeByTerm
+函数功能：根据下拉框的选择进行简历筛选展示
+参数：openid（用户唯一标识）,industry(行业),sex(性别),age(年龄),education(学历)（四个字段可能全部都有值，最少有一个字段非空）
+返回：isVip(是否是vip),resumeId(简历唯一标识)，name（简历人姓名），tel(联系电话)，hopePosition(意向岗位)
+
+url:https://www.yeahempire.com/getResumeByQuery
+函数名：getResumeByQuery
+函数功能：根据搜索框内容进行简历筛选展示
+参数：openid（用户唯一标识）,query(搜索框内容)
+返回：isVip(是否是vip),resumeId(简历唯一标识)，name（简历人姓名），tel(联系电话)，hopePosition(意向岗位)
+
+url:https://www.yeahempire.com/getResumeByResumeId
+函数名：getResumeByResumeId
+函数功能：根据简历唯一id获取简历全部字段
+参数：openid（用户唯一id）,resumeId(简历编号)
+返回：isVip(是否是vip),resume_details: {name: '刘伟乐', sex: '男', age: '23', birth_date: '1970-01-23', 
+addr: '四川', group: '汉族', marry: '未婚', PoliticalStatus: '群众', industry: '酒店/餐饮/快消',
+ position: '餐饮店长', hopeWorkspace: '湖南 长沙 芙蓉区', education: '本科', educationalType: '函授', 
+ school: 'xxx大学', major: '工商管理', workYear: '10年', professionalTitle: 'xxxx', 
+ registerTime: '2018-08-16', lastViewTime: '2018-08-19'}
+
+
+函数编写示例：
+def getResumeById(request):
+    if request.method == 'POST':
+        resumeId = request.POST['resumeId']
+        if resumeId is not '':
+            try:
+                detail = Tempinfo.objects.get(id=resumeId)
+                detail = serializer(detail,datetime_format='string')
+                return JsonResponse({'sucess':True,'data':detail})
+            except Exception as e:
+                return JsonResponse({'success':False,'data':str(e)})
+        else:
+            return JsonResponse({'success':False,'data':'没有数据'})

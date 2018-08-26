@@ -2,7 +2,6 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/search/search",
     "pages/resumedemo/resumedemo",
     "pages/select/select"
   ],

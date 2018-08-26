@@ -1,71 +1,7 @@
-// // pages/resumedemo/resumedemo.js
-// Page({
-
-//   /**
-//    * 页面的初始数据
-//    */
-//   data: {
-  
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面加载
-//    */
-//   onLoad: function (options) {
-  
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面初次渲染完成
-//    */
-//   onReady: function () {
-  
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面显示
-//    */
-//   onShow: function () {
-  
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面隐藏
-//    */
-//   onHide: function () {
-  
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面卸载
-//    */
-//   onUnload: function () {
-  
-//   },
-
-//   /**
-//    * 页面相关事件处理函数--监听用户下拉动作
-//    */
-//   onPullDownRefresh: function () {
-  
-//   },
-
-//   /**
-//    * 页面上拉触底事件的处理函数
-//    */
-//   onReachBottom: function () {
-  
-//   },
-
-//   /**
-//    * 用户点击右上角分享
-//    */
-//   onShareAppMessage: function () {
-  
-//   }
-// })
 Page({
   data: {
+    resume_id:null,
+    resume_details: null,
     showTopTips: false,
     radioItems: [
       { name: 'cell standard', value: '0' },
@@ -88,7 +24,34 @@ Page({
         array: ['优秀6', '满意2', '一般1', '差3'],
     index: 0,
   },
-
+  onLoad : function(options)
+  {
+      //获取上一个页面传值
+      var resumeID=options.id
+      this.setData({
+        resume_details: {
+        name: '刘伟乐', sex: '男', age: '23', birth_date: '1970-01-23', addr: '四川', group: '汉族', marry: '未婚', PoliticalStatus: '群众', industry: '酒店/餐饮/快消', position: '餐饮店长', hopeWorkspace: '湖南 长沙 芙蓉区', education: '本科', educationalType: '函授', school: 'xxx大学', major: '工商管理', workYear: '10年', professionalTitle: 'xxxx', registerTime: '2018-08-16', lastViewTime: '2018-08-19'
+        }
+      })
+    console.log("resumedemo resumeId:" + getApp().globalData.resumeId)
+      wx.request({
+        url: 'https://www.yeahempire.com/getResumeById',
+        data:{
+          resumeId: getApp().globalData.resumeId
+          //resumeId:resumeID
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          console.log(res.data)
+          this.setData({
+            resume_details: res.data
+          })
+        }
+      })
+  },
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({

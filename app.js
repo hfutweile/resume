@@ -2,14 +2,47 @@
 App({
   onLaunch: function () {
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    // var logs = wx.getStorageSync('logs') || []
+    // logs.unshift(Date.now())
+    // wx.setStorageSync('logs', logs)
 
     // 登录
     wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+      //获取code
+      success: function (res) {
+        var code = res.code; //返回code
+        //console.log(code);
+        var appId = 'wx742e2f5709ad09cc';
+        var secret = 'f9cd5a33ef546520b4ff14c8642ec8b9';
+        var that = this;
+        wx.request({
+          url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appId + '&secret=' + secret + '&js_code=' + code + '&grant_type=authorization_code',
+          data: {},
+          header: {
+            'content-type': 'json'
+          },
+          success: function (res) {
+            if (res.statusCode == 200) {
+              console.log("获取到的openid为：" + res.data.openid)
+              wx.setStorageSync('openid', res.data.openid)
+              //判断用户是否是vip
+              wx.request({
+                url: 'https://www.yeahempire.com/getVipByOpenId',
+                data:{
+                  openid: res.data.openid
+                },
+                header: {
+                  'content-type': 'json'
+                },
+                success:function(res){
+                  if (res.statusCode==200){
+                    wx.setStorageSync('isVip', res.data.isVip)
+                  }
+                }
+              })
+            }
+          }
+        })
       }
     })
     // 获取用户信息
@@ -34,6 +67,9 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    resumeCount:0,
+    openId:null,
+    resumeId:0,
   }
 })

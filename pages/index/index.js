@@ -4,23 +4,46 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
   gotoSearchPage: function(){
+    //如果不是VIP用户
+    if (wx.getStorageSync('isVip') == false) {
+      //获取用户输入电话号码,从输入框中获取
+      var Tel=''
+      wx.request({
+        url: 'https://www.yeahempire.com/setOpenidByTel',
+        data:{
+          openid:wx.getStorageSync('openid'),
+          tel:Tel
+        },
+        header: {
+          'content-type': 'json'
+        },
+        success:function(res){
+          if(res.statusCode==200)
+          {
+            wx.setStorageSync('isVip', res.data.status)
+          }
+        }
+      })
+    }
     wx.navigateTo({
       url: '../select/select',
     })
   },
   onLoad: function () {
+    if(wx.getStorageSync('isVip')==false)
+    {
+      //显示输入框
+    }
+    else if(wx.getStorageSync('isVip'))
+    {
+      //隐藏输入框
+    }
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
