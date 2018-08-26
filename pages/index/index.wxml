@@ -7,6 +7,13 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
-  <button  size="default" class="usermotto" bindtap='gotoSearchPage'> 请点击此处查询简历 </button>
+
+
+
+
+  <input size="default" class="weui-input checkname" placeholder=" 请输入用户名进行验证    " />
+
+  <button size="default" class="usermotto" bindtap='gotoSearchPage'> 请点击此处查询简历 </button>
+
 
 </view>
