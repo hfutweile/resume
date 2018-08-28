@@ -4,41 +4,110 @@ url:https://www.yeahempire.com/setOpenidByTel
 函数名：setOpenidByUsername
 函数功能：根据用户输入电话号码绑定openid
 参数：openid（微信用户唯一标识）,tel（后台用户唯一标识字段）
-返回：status(true or false)
+返回：status(true or false),msg(操作反馈信息)
 
-url:https://www.yeahempire.com/getVipByOpenId
-函数名：getVipByOpenId
-函数功能：根据openid判断用户是够是付费用户
-参数：openid（微信用户唯一标识）
-返回：isVip(是否是vip)
+url:https://www.yeahempire.com/getVipByOpenIdAndTel
+函数名：getVipByOpenIdAndTel
+函数功能：根据openid和tel判断用户是够是付费用户，且能否保证一个手机号只能绑定一个微信号
+参数：openid（微信用户唯一标识），tel(用户电话号码)
+返回：isVip(是否是vip),msg(操作反馈信息)
 
 url:https://www.yeahempire.com/getResume
 函数名：getResume
 函数功能：根据用户唯一标识获取初始展示的简历列表
 参数：openid（或者其他一些唯一标识用户的字段）
-返回：isVip(是否是vip),resumeId(简历唯一标识)，name（简历人姓名），tel(联系电话)，hopePosition(意向岗位)
+返回：isVip(是否是vip),[resume_simple1,resume_simple2,.......] （简历的list）
+具体单个简历的模板：resume_simple:resumeId(简历唯一标识)，name（简历人姓名），tel(联系电话)，hopePosition(意向岗位)
 
 url:https://www.yeahempire.com/getResumeByTerm
 函数名：getResumeByTerm
 函数功能：根据下拉框的选择进行简历筛选展示
 参数：openid（用户唯一标识）,industry(行业),sex(性别),age(年龄),education(学历)（四个字段可能全部都有值，最少有一个字段非空）
-返回：isVip(是否是vip),resumeId(简历唯一标识)，name（简历人姓名），tel(联系电话)，hopePosition(意向岗位)
+返回：isVip(是否是vip),[resume_simple1,resume_simple2,.......] （简历的list）
+具体单个简历的模板：resume_simple:resumeId(简历唯一标识)，name（简历人姓名），tel(联系电话)，hopePosition(意向岗位)
+
+其中industry取值范围：
+-1： 未选择
+0 ：不限
+1：'销售/客服/营销'
+2：'财务'
+3：'人力资源/行政后勤'
+4：'IT/互联网/通信'
+5：'房地产/物业'
+6：'建筑'
+7：'金融'
+8:'交通/物流' 
+9:'生产/制造'
+10:'传媒/设计/推广'
+11:'教育/翻译'
+12:'法律'
+13:'商场/服务/收银'
+14:'能源/环保/农业'
+15:'医药'
+16:'酒店/餐饮/快消'
+17:'普工'
+18:'兼职/实习'
+19:'其他'
+
+sex取值范围：
+-1：未选择
+0：不限
+1：男
+2：女
+
+age取值范围
+-1：未选择
+0：不限
+1：'20-30岁'
+2：'30-40岁'
+3：'40-50岁'
+4：'50-60岁'
+5：'60岁以上'
+
+education取值：
+-1：未选择
+0：不限
+1：'专科'
+2：'本科'
+3：'研究生'
+4：'博士生'
 
 url:https://www.yeahempire.com/getResumeByQuery
 函数名：getResumeByQuery
 函数功能：根据搜索框内容进行简历筛选展示
 参数：openid（用户唯一标识）,query(搜索框内容)
-返回：isVip(是否是vip),resumeId(简历唯一标识)，name（简历人姓名），tel(联系电话)，hopePosition(意向岗位)
+返回：isVip(是否是vip),返回：isVip(是否是vip),[resume_simple1,resume_simple2,.......] （简历的list）
+具体单个简历的模板：resume_simple:resumeId(简历唯一标识)，name（简历人姓名），tel(联系电话)，hopePosition(意向岗位)
 
 url:https://www.yeahempire.com/getResumeByResumeId
 函数名：getResumeByResumeId
 函数功能：根据简历唯一id获取简历全部字段
 参数：openid（用户唯一id）,resumeId(简历编号)
 返回：isVip(是否是vip),resume_details: {name: '刘伟乐', sex: '男', age: '23', birth_date: '1970-01-23', 
-addr: '四川', group: '汉族', marry: '未婚', PoliticalStatus: '群众', industry: '酒店/餐饮/快消',
- position: '餐饮店长', hopeWorkspace: '湖南 长沙 芙蓉区', education: '本科', educationalType: '函授', 
- school: 'xxx大学', major: '工商管理', workYear: '10年', professionalTitle: 'xxxx', 
- registerTime: '2018-08-16', lastViewTime: '2018-08-19'}
+addr: '四川', group: '汉族', isMarry: '未婚', PoliticalStatus: '群众', industry: '酒店/餐饮/快消',
+position: '餐饮店长', hopeWorkspace: '湖南 长沙 芙蓉区', education: '本科', educationalType: '函授', 
+school: 'xxx大学', major: '工商管理', workYear: '10年', professionalTitle: 'xxxx', 
+registerTime: '2018-08-16', lastViewTime: '2018-08-19','downloadCount':3,
+arrayLabel: ['优秀', '满意', '一般', '差'],
+arrayHighestSalary: ['18000', '16000', '14000', '12000'],
+arrayLowestSalar: ['5000', '4500', '4600', '5200'],
+arrayOnJob: ['在职', '离职', '下岗'],
+arrayLinkResult: ['已联系', '未接通', '其他']}
+
+
+
+url:https://www.yeahempire.com/setUserInputToDatabase
+函数名：setUserInputToDatabase
+函数功能：将用户输入评价、是否在职等信息输入到后台数据库
+参数：openid（微信用户唯一标识），labelInput(用户输入的标签),
+        hSalaryInput(用户输入的最高薪资),
+        lSalaryInpu(用户输入的最低薪资),
+        onJobInput(用户输入的是否在职),
+        wAdrrInput(用户输入的工作地),
+        wPosiInput(用户输入的工作岗位),
+        linkRInput(用户输入的联系结果),
+        evaluateInput(用户输入的评价结果)
+返回参数：status(是否操作成功)，msg(返回信息)
 
 
 函数编写示例：

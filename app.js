@@ -31,9 +31,7 @@ App({
                 data:{
                   openid: res.data.openid
                 },
-                header: {
-                  'content-type': 'json'
-                },
+                header: { "Content-Type": "application/x-www-form-urlencoded" },
                 success:function(res){
                   if (res.statusCode==200){
                     wx.setStorageSync('isVip', res.data.isVip)
@@ -69,7 +67,6 @@ App({
   globalData: {
     userInfo: null,
     resumeCount:0,
-    openId:null,
     resumeId:0,
   }
 })

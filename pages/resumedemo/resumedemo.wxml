@@ -78,9 +78,9 @@ https://www.jianshu.com/p/f82262002f8a
       <view class="weui-cell">
         <view class="section">
 
-          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <picker bindchange="bindPickerChangeLabel" value="{{indexLabel}}" range="{{arrayLabel}}">
             <view class="picker">
-              标签：{{array[index]}}
+              标签：{{arrayLabel[indexLabel]}}
             </view>
           </picker>
         </view>
@@ -90,7 +90,7 @@ https://www.jianshu.com/p/f82262002f8a
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入您的标签" />
+            <input class="weui-input" bindinput="LabelInput" placeholder="请输入您的标签" />
           </view>
         </view>
       </view>
@@ -99,9 +99,9 @@ https://www.jianshu.com/p/f82262002f8a
       <view class="weui-cell">
         <view class="section">
 
-          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <picker bindchange="bindPickerChangeHighestSalary" value="{{indexHighestSalary}}" range="{{arrayHighestSalary}}">
             <view class="picker">
-              最高薪酬：{{array[index]}}
+              最高薪酬：{{arrayHighestSalary[indexHighestSalary]}}
             </view>
           </picker>
         </view>
@@ -111,7 +111,7 @@ https://www.jianshu.com/p/f82262002f8a
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入最新最高薪酬" />
+            <input class="weui-input" bindinput="HSalaryInput" placeholder="请输入最新最高薪酬" />
           </view>
         </view>
       </view>
@@ -123,9 +123,9 @@ https://www.jianshu.com/p/f82262002f8a
       <view class="weui-cell">
         <view class="section">
 
-          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <picker bindchange="bindPickerChangeLowestSalary" value="{{indexLowestSalary}}" range="{{arrayLowestSalary}}">
             <view class="picker">
-              最低薪酬：{{array[index]}}
+              最低薪酬：{{arrayLowestSalary[indexLowestSalary]}}
             </view>
           </picker>
         </view>
@@ -135,7 +135,7 @@ https://www.jianshu.com/p/f82262002f8a
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入最新最低薪酬" />
+            <input class="weui-input" bindinput="LSalaryInput" placeholder="请输入最新最低薪酬" />
           </view>
         </view>
       </view>
@@ -146,9 +146,9 @@ https://www.jianshu.com/p/f82262002f8a
       <view class="weui-cell">
         <view class="section">
 
-          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <picker bindchange="bindPickerChangeOnJob" value="{{indexOnJob}}" range="{{arrayOnJob}}">
             <view class="picker">
-              是否在职：{{array[index]}}
+              是否在职：{{arrayOnJob[indexOnJob]}}
             </view>
           </picker>
         </view>
@@ -158,7 +158,7 @@ https://www.jianshu.com/p/f82262002f8a
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入是否在职" />
+            <input class="weui-input" bindinput="OnJobInput" placeholder="请输入是否在职" />
           </view>
         </view>
       </view>
@@ -172,14 +172,14 @@ https://www.jianshu.com/p/f82262002f8a
           <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入最近工作单位" />
+            <input class="weui-input" bindinput="WAdrrInput" placeholder="请输入最近工作单位" />
           </view>
         </view>
       </view>
             <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入最近岗位" />
+            <input class="weui-input" bindinput="WPosiInput" placeholder="请输入最近岗位" />
           </view>
         </view>
       </view>
@@ -191,9 +191,9 @@ https://www.jianshu.com/p/f82262002f8a
       <view class="weui-cell">
         <view class="section">
 
-          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <picker bindchange="bindPickerChangeLinkResult" value="{{indexLinkResult}}" range="{{arrayLinkResult}}">
             <view class="picker">
-              联系结果：{{array[index]}}
+              联系结果：{{arrayLinkResult[indexLinkResult]}}
             </view>
           </picker>
         </view>
@@ -203,12 +203,12 @@ https://www.jianshu.com/p/f82262002f8a
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入联系结果" />
+            <input class="weui-input" bindinput="LinkRInput" placeholder="请输入联系结果" />
           </view>
         </view>
       </view>
       <view class='weui-cell'>
-      下载次数：3
+      下载次数：{{resume_details.downloadCount}}
       </view>
 
     </view>
@@ -217,7 +217,7 @@ https://www.jianshu.com/p/f82262002f8a
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
           <view class="weui-cell__bd">
-            <textarea class="weui-textarea" placeholder="请输入评价" style="height: 3.3em" />
+            <textarea class="weui-textarea" bindinput='EvaluateInput' placeholder="请输入评价" style="height: 3.3em" />
             <view class="weui-textarea-counter">0/200</view>
           </view>
         </view>
@@ -225,7 +225,7 @@ https://www.jianshu.com/p/f82262002f8a
 
 </view>
 
-        <button  size="default" class="usermotto" bindtap=''>确认并提交 </button>
+        <button  size="default" class="usermotto" bindtap='setUserInputToDatabase'>确认并提交 </button>
 
   </view>
   </view>

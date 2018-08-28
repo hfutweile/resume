@@ -10,8 +10,13 @@
 
 
 
+<block wx:if="{{isVip==false}}">
+  <input size="default" class="weui-input checkname" bindinput="TelInput" placeholder=" 请输入手机号进行验证" />
+</block>
 
-  <input size="default" class="weui-input checkname" placeholder=" 请输入用户名进行验证    " />
+<block wx:if="{{isVip==true}}">
+  <input size="default"  disabled="true" class="weui-input checkname" bindinput="TelInput" placeholder="手机号：{{Tel}}" />
+</block>
 
   <button size="default" class="usermotto" bindtap='gotoSearchPage'> 请点击此处查询简历 </button>
 

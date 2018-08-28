@@ -4,29 +4,35 @@ const app = getApp()
 
 Page({
   data: {
+    isVip:false,
+    TelInput:null,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
+  },
+  TelInput :function(e)
+  {
+    this.data.TelInput=e.detail.value;
+    wx.setStorageSync('tel', e.detail.value )
   },
   //事件处理函数
   gotoSearchPage: function(){
     //如果不是VIP用户
     if (wx.getStorageSync('isVip') == false) {
       //获取用户输入电话号码,从输入框中获取
-      var Tel=''
       wx.request({
-        url: 'https://www.yeahempire.com/setOpenidByTel',
+        url: 'http://www.yeahempire.com:6800/xiaomai/setOpenidByTel',
         data:{
           openid:wx.getStorageSync('openid'),
-          tel:Tel
+          tel:this.data.TelInput
         },
-        header: {
-          'content-type': 'json'
-        },
+        method: 'POST',
+        header: { "Content-Type": "application/x-www-form-urlencoded" },
         success:function(res){
           if(res.statusCode==200)
           {
-            wx.setStorageSync('isVip', res.data.status)
+            wx.setStorageSync('isVip', res.data.code)
+            console.log(res.data.msg)
           }
         }
       })
@@ -36,14 +42,10 @@ Page({
     })
   },
   onLoad: function () {
-    if(wx.getStorageSync('isVip')==false)
-    {
-      //显示输入框
-    }
-    else if(wx.getStorageSync('isVip'))
-    {
-      //隐藏输入框
-    }
+    this.setData({
+      isVip:wx.getStorageSync('isVip'),
+      Tel:wx.getStorageSync('tel')
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
