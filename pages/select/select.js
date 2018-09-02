@@ -70,19 +70,31 @@ Page({
     var userInfo = app.globalData.userInfo;//取得全局变量需要的值
     var openid = wx.getStorageSync('openid')
     console.log('select storage page openid:' + openid)
+    var that=this;
     wx.request({
-      url: 'https://www.yeahempire.com/getResume',
+      url: wx.getStorageSync('url') +'getResume',
       data:{
-        username: wx.getStorageSync('openid')
+        openid: wx.getStorageSync('openid')
       },
       method:'POST',
       header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: function (res) {
-        console.log(res.data)
-        this.setData({
-          resume:res.data,
-          resume: [{ id: 1, name: 'liuweile', phone: '1111', position: 'student' }, { id: 2, name: 'liuweile2', phone: '2222', position: 'student' }],
-        })
+        if (res.statusCode == 200)
+        {
+          wx.setStorageSync('resumeCount', 0);
+          var isVip = res.data.vip.vip;
+          //判断是不是vip，不是的话，隐藏电话号码信息，暂时未完成
+          var Resume=res.data.data
+          console.log(Resume)
+          if(isVip==0){
+            for (var i = 0; i < Resume.length; i++) {
+              Resume[i].phone_number = "**";
+            }
+          }
+          that.setData({
+            resume: Resume,
+          })
+        }
       }
     })
   },
@@ -120,8 +132,10 @@ Page({
   {
     var app = getApp();//取得全局App({..})实例
     app.globalData.resumeCount=0;//取得全局变量需要的值
+    var that=this;
       wx.request({
-        url: 'https://www.yeahempire.com/getResumeByTerm',
+        url: wx.getStorageSync('url') +'getByTerm',
+        //url: 'https://www.yeahempire.com/getResumeByTerm',
         data:{
           openid:wx.getStorageSync('openid'),
           industry:this.data.hyid,
@@ -132,10 +146,22 @@ Page({
         method:'POST',
         header: { "Content-Type": "application/x-www-form-urlencoded" },
         success: function (res) {
-          console.log(res.data)
-          this.setData({
-            resume: res.data
-          })
+          if (res.statusCode == 200) {
+            wx.setStorageSync('resumeCount', 0);
+            var isVip = res.data.vip.vip;
+            //判断是不是vip，不是的话，隐藏电话号码信息，暂时未完成
+            var Resume = res.data.data
+            if (isVip==0)
+            {
+              for (var i = 0; i < Resume.length; i++) {
+                Resume[i].phone_number = "**";
+                //Resume[i].gangwei = "**";
+              }
+            }
+            that.setData({
+              resume: Resume,
+            })
+          }
         }
       })
       this.data.hyid=-1;
@@ -148,8 +174,10 @@ Page({
   {
     var app = getApp();//取得全局App({..})实例
     app.globalData.resumeCount = 0;//取得全局变量需要的值
+    var that = this;
       wx.request({
-        url: 'https://www.yeahempire.com/getResumeByQuery',
+        url: wx.getStorageSync('url') +'getByQuery',
+        //url: 'https://www.yeahempire.com/getResumeByQuery',
         data:{
           openid: wx.getStorageSync('openid'),
           query: this.data.inputVal
@@ -157,18 +185,28 @@ Page({
         method: 'POST',
         header: { "Content-Type": "application/x-www-form-urlencoded" },
         success: function (res) {
-          console.log(res.data)
-          this.setData({
-            resume: res.data
-          })
+          if (res.statusCode == 200) {
+            wx.setStorageSync('resumeCount', 0);
+            var isVip = res.data.vip.vip;
+            //判断是不是vip，不是的话，隐藏电话号码信息，暂时未完成
+            var Resume = res.data.data
+            if(isVip==0)
+            {
+              for (var i = 0; i < Resume.length; i++) {
+                Resume[i].phone_number = "**";
+                //Resume[i].gangwei = "**";
+              }
+            }
+            that.setData({
+              resume: Resume,
+            })
+          }
         }
       })
   },
   previewTodetail :function(e)
   {
-    var app = getApp();//取得全局App({..})实例
-    app.globalData.resumeCount++;
-    if (app.globalData.resumeCount>=50)
+    if (wx.getStorageSync('resumeCount')>=50)
     {
       wx.navigateTo({
         url: '../select/select',

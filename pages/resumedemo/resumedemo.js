@@ -1,5 +1,6 @@
 Page({
   data: {
+    resumeId:-1,
     LabelInput:0,
     HSalaryInput:0.0,
     LSalaryInput:0.0,
@@ -15,8 +16,8 @@ Page({
     indexLabel: 0,
     arrayHighestSalary: ['18000', '16000', '14000', '12000'],
     indexHighestSalary: 0,
-    arrayLowestSalar: ['5000', '4500', '4600', '5200'],
-    indexLowestSalar: 0,
+    arrayLowestSalary: ['5000', '4500', '4600', '5200'],
+    indexLowestSalary: 0,
     arrayOnJob: ['在职', '离职', '下岗'],
     indexOnJob: 0,
     arrayLinkResult: ['已联系', '未接通', '其他'],
@@ -51,10 +52,13 @@ Page({
   onLoad : function(options)
   {
     //获取上一个页面传值
-    var ID=options.id
+    var ID=options.id;
+    this.data.resumeId=ID;
+    var that=this;
       wx.request({
-        url: 'https://www.yeahempire.com/getResumeById',
+        url: wx.getStorageSync('url') +'getByResumeId',
         data:{
+          openid:wx.getStorageSync('openid'),
           resumeId: ID
         },
         method: 'POST',
@@ -62,9 +66,64 @@ Page({
         success: function (res) {
           console.log(res.data)
           if (res.statusCode == 200){
-            this.setData({
-              resume_details: res.data
+            wx.setStorageSync('resumeCount', wx.getStorageSync('resumeCount')+1)
+            console.log(res.data.data[0]);
+            var isVip = res.data.vip.vip
+            console.log(isVip)
+            if(isVip==0){
+              res.data.data[0].name='**';
+              res.data.data[0].phone_number='**';
+            }
+            if (res.data.data[0].sex==2)
+            {
+              res.data.data[0].sex='女';
+            }
+            else if (res.data.data[0].sex == 1){
+              res.data.data[0].sex = '男';
+            }
+            if(res.data.data[0].hunyinzhuangtai==0)
+            {
+              res.data.data[0].hunyinzhuangtai = '未婚';
+            }
+            if (res.data.data[0].hunyinzhuangtai == 1) {
+              res.data.data[0].hunyinzhuangtai = '已婚';
+            }
+            if (res.data.data[0].hunyinzhuangtai == 2) {
+              res.data.data[0].hunyinzhuangtai = '离异';
+            }
+            var industry={
+            1:'销售/客服/营销',
+            2:'财务',
+            3:'人力资源/行政后勤',
+            4:'IT/互联网/通信',
+            5:'房地产/物业',
+            6:'建筑',
+            7:'金融',
+            8:'交通/物流',
+            9: '生产/制造',
+            10: '传媒/设计/推广',
+            11: '教育/翻译',
+            12: '法律',
+            13: '商场/服务/收银',
+            14: '能源/环保/农业',
+            15: '医药',
+            16: '酒店/餐饮/快消',
+            17: '普工',
+            18: '兼职/实习',
+            19: '其他'}
+            res.data.data[0].hangye = industry[res.data.data[0].hangye]
+            var education={
+              0:'不限',
+              1:'专科',
+              2:'本科',
+              3:'研究生',
+              4:'博士生'
+            }
+            res.data.data[0].xueli = education[res.data.data[0].xueli]
+            that.setData({
+              resume_details: res.data.data[0]
             })
+            
           }
           
         }
@@ -72,8 +131,9 @@ Page({
   },
   setUserInputToDatabase:function(e){
     wx.request({
-      url: 'https://www.yeahempire.com/setUserInputToDatabase',
+      url: wx.getStorageSync('url')+'setUserInputToDatabase',
       data: {
+        resumeId:this.data.resumeId,
         labelInput: this.data.LabelInput,
         hSalaryInput: this.data.HSalaryInput,
         lSalaryInput: this.data.LSalaryInput,

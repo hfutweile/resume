@@ -1,10 +1,13 @@
 输出传输：POST,参数名为每个函数的输入参数
 
 url:https://www.yeahempire.com/setOpenidByTel
-函数名：setOpenidByUsername
+函数名：setOpenidByTel
 函数功能：根据用户输入电话号码绑定openid
 参数：openid（微信用户唯一标识）,tel（后台用户唯一标识字段）
-返回：status(true or false),msg(操作反馈信息)
+返回：isVip(是否是vip),status,msg(操作反馈信息)
+status（数据操作状态）：1，数据库里不存在，插入成功，0数据库里存在，插入失败
+isVip，是的话，返回是1，不是的话返回0，
+msg返回是否插入成功即可，或者返回支付判断的条件用于判断
 
 url:https://www.yeahempire.com/getVipByOpenIdAndTel
 函数名：getVipByOpenIdAndTel
@@ -87,7 +90,7 @@ url:https://www.yeahempire.com/getResumeByResumeId
 addr: '四川', group: '汉族', isMarry: '未婚', PoliticalStatus: '群众', industry: '酒店/餐饮/快消',
 position: '餐饮店长', hopeWorkspace: '湖南 长沙 芙蓉区', education: '本科', educationalType: '函授', 
 school: 'xxx大学', major: '工商管理', workYear: '10年', professionalTitle: 'xxxx', 
-registerTime: '2018-08-16', lastViewTime: '2018-08-19','downloadCount':3,
+registerTime: '2018-08-16', lastViewTime: '2018-08-19',downloadCount:3,
 arrayLabel: ['优秀', '满意', '一般', '差'],
 arrayHighestSalary: ['18000', '16000', '14000', '12000'],
 arrayLowestSalar: ['5000', '4500', '4600', '5200'],

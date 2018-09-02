@@ -4,7 +4,8 @@ App({
     // 展示本地存储能力
     // var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
-    // wx.setStorageSync('logs', logs)
+    wx.setStorageSync('url', 'http://47.94.104.242:6800/xiaomai/')
+    wx.setStorageSync('resumeCount', 0)
 
     // 登录
     wx.login({
@@ -27,14 +28,17 @@ App({
               wx.setStorageSync('openid', res.data.openid)
               //判断用户是否是vip
               wx.request({
-                url: 'https://www.yeahempire.com/getVipByOpenId',
+                url: wx.getStorageSync('url') +'getVipByOpenidAndTel',
                 data:{
-                  openid: res.data.openid
+                  openid: res.data.openid,
+                  tel:wx.getStorageSync('tel')
                 },
+                method:'POST',
                 header: { "Content-Type": "application/x-www-form-urlencoded" },
                 success:function(res){
                   if (res.statusCode==200){
-                    wx.setStorageSync('isVip', res.data.isVip)
+                    console.log('是否是vip:'+res.data.data.vip)
+                    wx.setStorageSync('isVip', res.data.data.vip)
                   }
                 }
               })
@@ -66,7 +70,5 @@ App({
   },
   globalData: {
     userInfo: null,
-    resumeCount:0,
-    resumeId:0,
   }
 })

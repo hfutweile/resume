@@ -13,23 +13,23 @@ https://www.jianshu.com/p/f82262002f8a
     </view>
     <view class='item_1'>
       <view>年龄：{{resume_details.age}}</view>
-      <view class='item_right'>出生年月：{{resume_details.birth_date}}</view>
+      <view class='item_right'>出生年月：{{resume_details.birthday}}</view>
     </view>
     <view class='item_1'>
-      <view>籍贯：{{resume_details.addr}}</view>
-      <view class='item_right'>民族：{{resume_details.group}}</view>
+      <view>籍贯：{{resume_details.jiguan}}</view>
+      <view class='item_right'>民族：{{resume_details.minzu}}</view>
     </view>
     <view class='item_1'>
-      <view>婚姻：{{resume_details.marry}}</view>
-      <view class='item_right'>政治面貌：{{resume_details.PoliticalStatus}}</view>
+      <view>婚姻：{{resume_details.hunyinzhuangtai}}</view>
+      <view class='item_right'>政治面貌：{{resume_details.zhengzhimianmao}}</view>
     </view>
     <view class='item_1'>
-      <view>行业：{{resume_details.industry}}</view>
+      <view>行业：{{resume_details.hangye}}</view>
 
     </view>
     <view class='item_1'>
 
-      <view>岗位：{{resume_details.position}}</view>
+      <view>岗位：{{resume_details.gangwei}}</view>
     </view>
     <view class='item_1'>
       <view>期望工作省份/城市/城区 </view>
@@ -37,7 +37,7 @@ https://www.jianshu.com/p/f82262002f8a
 
     </view>
     <view class='item_1'>
-      <view>{{resume_details.hopeWorkspace}}</view>
+      <view>{{resume_details.qiwang_shengfen}}/{{resume_details.qiwang_city}}/{{resume_details.qiwang_quxian}}</view>
     </view>
 
         
@@ -45,28 +45,28 @@ https://www.jianshu.com/p/f82262002f8a
   <view class="page__title">教育经历</view>
   <view class='uneditmsg'>
     <view class='item_1'>
-      最高学历：{{resume_details.education}}
+      最高学历：{{resume_details.xueli}}
     </view>
     <view class='item_1'>
-      学历性质：{{resume_details.educationalType}}
+      学历性质：{{resume_details.xueli}}
     </view>
     <view class='item_1'>
-      院校：{{resume_details.school}}
+      院校：{{resume_details.biyeyuanxiao}}
     </view>
     <view class='item_1'>
-      专业：{{resume_details.major}}
+      专业：{{resume_details.zhuanye}}
     </view>
     <view class='item_1'>
-      工作经验：{{resume_details.workYear}}
+      工作经验：{{resume_details.gongzuojingyan}}
     </view>
     <view class='item_1'>
-      职称/证书：{{resume_details.professionalTitle}}
+      职称/证书：{{resume_details.zhicheng}}
     </view>
     <view class='item_1'>
-      登记时间：{{resume_details.registerTime}}
+      登记时间：{{resume_details.create_time}}
     </view>
     <view class='item_1'>
-      最新查看时间：{{resume_details.lastViewTime}}
+      查看时间：{{resume_details.download_time}}
     </view>
   </view>
   <view class="page__title">请您编辑以下资料</view>
@@ -122,12 +122,13 @@ https://www.jianshu.com/p/f82262002f8a
     <view class='lowsalary'  style='border-bottom: 1rpx solid #3367D6;'>
       <view class="weui-cell">
         <view class="section">
-
+        
           <picker bindchange="bindPickerChangeLowestSalary" value="{{indexLowestSalary}}" range="{{arrayLowestSalary}}">
             <view class="picker">
               最低薪酬：{{arrayLowestSalary[indexLowestSalary]}}
             </view>
-          </picker>
+          </picker> 
+
         </view>
 
 
@@ -208,7 +209,7 @@ https://www.jianshu.com/p/f82262002f8a
         </view>
       </view>
       <view class='weui-cell'>
-      下载次数：{{resume_details.downloadCount}}
+      下载次数：{{resume_details.download_num}}
       </view>
 
     </view>

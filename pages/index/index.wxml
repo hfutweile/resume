@@ -10,11 +10,11 @@
 
 
 
-<block wx:if="{{isVip==false}}">
+<block wx:if="{{isVip==0}}">
   <input size="default" class="weui-input checkname" bindinput="TelInput" placeholder=" 请输入手机号进行验证" />
 </block>
 
-<block wx:if="{{isVip==true}}">
+<block wx:if="{{isVip==1}}">
   <input size="default"  disabled="true" class="weui-input checkname" bindinput="TelInput" placeholder="手机号：{{Tel}}" />
 </block>
 

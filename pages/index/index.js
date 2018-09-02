@@ -18,10 +18,10 @@ Page({
   //事件处理函数
   gotoSearchPage: function(){
     //如果不是VIP用户
-    if (wx.getStorageSync('isVip') == false) {
+    if (wx.getStorageSync('isVip') == 0) {
       //获取用户输入电话号码,从输入框中获取
       wx.request({
-        url: 'http://www.yeahempire.com:6800/xiaomai/setOpenidByTel',
+        url: wx.getStorageSync('url') +'setOpenidByTel',
         data:{
           openid:wx.getStorageSync('openid'),
           tel:this.data.TelInput
@@ -31,8 +31,9 @@ Page({
         success:function(res){
           if(res.statusCode==200)
           {
-            wx.setStorageSync('isVip', res.data.code)
-            console.log(res.data.msg)
+            wx.setStorageSync('isVip', res.data.vip)
+            console.log('function setOpenidByTel res:');
+            console.log(res)
           }
         }
       })
