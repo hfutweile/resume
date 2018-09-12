@@ -6,6 +6,7 @@ App({
     // logs.unshift(Date.now())
     wx.setStorageSync('url', 'http://47.94.104.242:8088/xiaomai/')
     wx.setStorageSync('resumeCount', 0)
+    wx.setStorageSync('isVip',0)
 
     // 登录
     wx.login({
