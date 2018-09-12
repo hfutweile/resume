@@ -8,7 +8,7 @@
 
 .checkname {
   margin-top: 200px;
-  border: 2rpx solid rgb(51, 103, 214);
+  border: 2rpx solid #FF6633;
   border-radius: 5px;
   
 }
@@ -26,6 +26,6 @@
 
 .usermotto {
   margin-top: 15px;
-  background-color: rgb(51, 103, 214);
+  background-color: #FF6633;
   color: white;
 }

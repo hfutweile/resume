@@ -104,10 +104,10 @@
     opacity: .5;
 }
 .nav-son.active .content{
-    color: rgb(51, 103, 214);
+    color: #FF6633
 }
 .nav-son.active .icon{
-    border-bottom: 4px solid rgb(51, 103, 214);
+    border-bottom: 4px solid #FF6633;
     border-top:0;
 }
 @keyframes slidown{

@@ -50,28 +50,28 @@
   <view class="temp temp1 {{hyopen ? 'slidown' : 'slidup'}} {{hyshow ? 'disappear':''}}">
     <view wx:for="{{content}}">
        <view class=" " data-id="{{index}}" bindtap="tagChoosehy">
-                   <text style="{{index == id?'color:#3367D6':'color:gray'}}">{{item.name}}</text>
+                   <text style="{{index == id?'color:#FF6633':'color:gray'}}">{{item.name}}</text>
       </view>
     </view>
   </view>
   <view class="temp temp1 {{xbopen ? 'slidown' : 'slidup'}} {{xbshow ? 'disappear':''}}">
     <view wx:for="{{content}}">
        <view class=" " data-id="{{index}}" bindtap="tagChoosexb">
-                   <text style="{{index == id?'color:#3367D6':'color:gray'}}">{{item.name}}</text>
+                   <text style="{{index == id?'color:#FF6633':'color:gray'}}">{{item.name}}</text>
       </view>
     </view>
   </view>
   <view class="temp temp1 {{nlopen ? 'slidown' : 'slidup'}} {{nlshow ? 'disappear':''}}">
     <view wx:for="{{content}}">
        <view class=" " data-id="{{index}}" bindtap="tagChoosenl">
-                   <text style="{{index == id?'color:#3367D6':'color:gray'}}">{{item.name}}</text>
+                   <text style="{{index == id?'color:#FF6633':'color:gray'}}">{{item.name}}</text>
       </view>
     </view>
   </view>
   <view class="temp temp1 {{xlopen ? 'slidown' : 'slidup'}} {{xlshow ? 'disappear':''}}">
     <view wx:for="{{content}}" >
       <view class=" " data-id="{{index}}" bindtap="tagChoosexl">
-                   <text style="{{index == id?'color:#3367D6':'color:gray'}}">{{item.name}}</text>
+                   <text style="{{index == id?'color:#FF6633':'color:gray'}}">{{item.name}}</text>
       </view>
     </view>
   </view>

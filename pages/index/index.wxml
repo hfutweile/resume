@@ -1,4 +1,6 @@
 <!--index.wxml-->
+<view class='page'>
+
 <view class="container">
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
@@ -19,6 +21,9 @@
 </block>
 
   <button size="default" class="usermotto" bindtap='gotoSearchPage'> 请点击此处查询简历 </button>
+
+
+</view>
 
 
 </view>
