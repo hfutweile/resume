@@ -121,7 +121,12 @@ Page({
             }
             res.data.data[0].xueli = education[res.data.data[0].xueli]
             that.setData({
-              resume_details: res.data.data[0]
+              resume_details: res.data.data[0],
+              arrayLabel: res.data.data[0].label.split('\t'),
+              arrayHighestSalary: res.data.data[0].qiwang_high.split('\t'),
+              arrayLowestSalary: res.data.data[0].qiwang_low.split('\t'),
+              arrayOnJob: res.data.data[0].zaizhi.split('\t'),
+              arrayLinkResult: res.data.data[0].lianxijieguo.split('\t'),
             })
             
           }
@@ -145,7 +150,7 @@ Page({
       },
       method: 'POST',
       header: { "Content-Type": "application/x-www-form-urlencoded" },
-      success:function(e){
+      success:function(res){
         if (res.statusCode == 200)
         {
           console.log(res.data);

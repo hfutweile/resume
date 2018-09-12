@@ -48,7 +48,7 @@ https://www.jianshu.com/p/f82262002f8a
       最高学历：{{resume_details.xueli}}
     </view>
     <view class='item_1'>
-      学历性质：{{resume_details.xueli}}
+      学历性质：{{resume_details.xuelixingzhi}}
     </view>
     <view class='item_1'>
       院校：{{resume_details.biyeyuanxiao}}
