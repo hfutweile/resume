@@ -48,7 +48,7 @@ https://www.jianshu.com/p/f82262002f8a
       最高学历：{{resume_details.xueli}}
     </view>
     <view class='item_1'>
-      学历性质：{{resume_details.xueli}}
+      学历性质：{{resume_details.xuelixingzhi}}
     </view>
     <view class='item_1'>
       院校：{{resume_details.biyeyuanxiao}}
@@ -173,7 +173,7 @@ https://www.jianshu.com/p/f82262002f8a
           <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__bd">
-            <input class="weui-input" bindinput="WAdrrInput" placeholder="请输入最近工作单位" />
+            <input class="weui-input" bindinput="WAdrrInput" placeholder="请输入最近工作地址" />
           </view>
         </view>
       </view>

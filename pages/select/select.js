@@ -3,7 +3,7 @@ Page({
     openid:null,
     inputShowed: false,
     inputVal: "",
-    resume: [{ id: 1, name: 'liuweile', phone: '1111', position: 'student' }, { id: 2, name: 'liuweile2', phone: '2222', position: 'student' }],
+    resume:[],
     content: [],
     hy: [],
     xb: [],

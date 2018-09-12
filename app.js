@@ -4,7 +4,7 @@ App({
     // 展示本地存储能力
     // var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
-    wx.setStorageSync('url', 'http://47.94.104.242:6800/xiaomai/')
+    wx.setStorageSync('url', 'http://47.94.104.242:8088/xiaomai/')
     wx.setStorageSync('resumeCount', 0)
 
     // 登录
