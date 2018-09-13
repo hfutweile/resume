@@ -82,7 +82,7 @@ Page({
         if (res.statusCode == 200)
         {
           wx.setStorageSync('resumeCount', 0);
-          var isVip = res.data.vip.vip;
+          var isVip = wx.getStorageSync('isVip');
           //判断是不是vip，不是的话，隐藏电话号码信息，暂时未完成
           var Resume=res.data.data
           console.log(Resume)
@@ -148,7 +148,7 @@ Page({
         success: function (res) {
           if (res.statusCode == 200) {
             wx.setStorageSync('resumeCount', 0);
-            var isVip = res.data.vip.vip;
+            var isVip = wx.getStorageSync('isVip');
             //判断是不是vip，不是的话，隐藏电话号码信息，暂时未完成
             var Resume = res.data.data
             if (isVip==0)
@@ -187,7 +187,7 @@ Page({
         success: function (res) {
           if (res.statusCode == 200) {
             wx.setStorageSync('resumeCount', 0);
-            var isVip = res.data.vip.vip;
+            var isVip = wx.getStorageSync('isVip');
             //判断是不是vip，不是的话，隐藏电话号码信息，暂时未完成
             var Resume = res.data.data
             if(isVip==0)
