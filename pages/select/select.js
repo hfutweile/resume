@@ -88,7 +88,7 @@ Page({
           console.log(Resume)
           if(isVip!=1){
             for (var i = 0; i < Resume.length; i++) {
-              Resume[i].phone_number = "**";
+              Resume[i].tel = "**";
             }
           }
           that.setData({

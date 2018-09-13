@@ -40,7 +40,8 @@ App({
                 success:function(res){
                   if (res.statusCode==200){
                     console.log('是否是vip:'+res.data.data.vip)
-                    wx.setStorageSync('isVip', res.data.data.vip)
+                    if (res.data.data.vip == 0 && res.data.data.vip==1)
+                    wx.setStorageSync('isVip', res.data.data.vip);
                   }
                 }
               })
