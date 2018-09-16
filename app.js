@@ -1,20 +1,11 @@
 //app.js
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    // var logs = wx.getStorageSync('logs') || []
-    // logs.unshift(Date.now())
-    //https://www.yeahempire.com/getResumeByResumeId
-    wx.setStorageSync('url', 'http://www.yeahempire.com:8088/xiaomai/')
-    wx.setStorageSync('resumeCount', 0)
-    wx.setStorageSync('isVip', 0)
-
     // 登录
     wx.login({
       //获取code
       success: function (res) {
         var code = res.code; //返回code
-        //console.log(code);
         var appId = 'wx742e2f5709ad09cc';
         var secret = 'f9cd5a33ef546520b4ff14c8642ec8b9';
         var that = this;
@@ -26,22 +17,20 @@ App({
           },
           success: function (res) {
             if (res.statusCode == 200) {
-              console.log("获取到的openid为：" + res.data.openid)
               wx.setStorageSync('openid', res.data.openid)
               //判断用户是否是vip
               wx.request({
-                url: wx.getStorageSync('url') +'getVipByOpenidAndTel',
-                data:{
+                url: getApp().globalData.url + 'getVipByOpenidAndTel',
+                data: {
                   openid: res.data.openid,
-                  tel:wx.getStorageSync('tel')
+                  tel: wx.getStorageSync('tel')
                 },
-                method:'POST',
+                method: 'POST',
                 header: { "Content-Type": "application/x-www-form-urlencoded" },
-                success:function(res){
-                  if (res.statusCode==200){
-                    console.log('是否是vip:'+res.data.data.vip)
-                    if (res.data.data.vip == 0 && res.data.data.vip==1)
-                    wx.setStorageSync('isVip', res.data.data.vip);
+                success: function (res) {
+                  if (res.statusCode == 200) {
+                    wx.setStorageSync('isVip', res.data.data.vip)
+                    console.log(getApp().globalData.isVip)
                   }
                 }
               })
@@ -50,6 +39,7 @@ App({
         })
       }
     })
+
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -73,5 +63,7 @@ App({
   },
   globalData: {
     userInfo: null,
+    url: 'http://www.yeahempire.com:8088/xiaomai/',
+    resumeCount:0,
   }
 })

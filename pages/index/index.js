@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    isVip:false,
+    isVip:0,
     TelInput:null,
     userInfo: {},
     hasUserInfo: false,
@@ -12,16 +12,16 @@ Page({
   },
   TelInput :function(e)
   {
-    this.data.TelInput=e.detail.value;
-    wx.setStorageSync('tel', e.detail.value )
+    wx.setStorageSync('tel', e.detail.value)
+    this.data.TelInput = wx.getStorageSync('tel');
   },
   //事件处理函数
   gotoSearchPage: function(){
     //如果不是VIP用户
-    if (wx.getStorageSync('isVip') == 0) {
+    if (wx.getStorageSync('isVip') != 1) {
       //获取用户输入电话号码,从输入框中获取
       wx.request({
-        url: wx.getStorageSync('url') +'setOpenidByTel',
+        url: getApp().globalData.url +'setOpenidByTel',
         data:{
           openid:wx.getStorageSync('openid'),
           tel:this.data.TelInput
@@ -31,9 +31,7 @@ Page({
         success:function(res){
           if(res.statusCode==200)
           {
-            wx.setStorageSync('isVip', res.data.vip)
-            console.log('function setOpenidByTel res:');
-            console.log(res)
+            wx.setStorageSync('isVip', res.data.data.vip);
           }
         }
       })
@@ -45,7 +43,7 @@ Page({
   onLoad: function () {
     this.setData({
       isVip:wx.getStorageSync('isVip'),
-      Tel:wx.getStorageSync('tel')
+      TelInput:wx.getStorageSync('tel')
     })
     if (app.globalData.userInfo) {
       this.setData({

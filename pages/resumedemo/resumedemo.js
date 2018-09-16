@@ -56,9 +56,9 @@ Page({
     this.data.resumeId=ID;
     var that=this;
       wx.request({
-        url: wx.getStorageSync('url') +'getByResumeId',
+        url: getApp().globalData.url +'getByResumeId',
         data:{
-          openid:wx.getStorageSync('openid'),
+          openid: wx.getStorageSync('openid'),
           resumeId: ID
         },
         method: 'POST',
@@ -66,11 +66,11 @@ Page({
         success: function (res) {
           console.log(res.data)
           if (res.statusCode == 200){
-            wx.setStorageSync('resumeCount', wx.getStorageSync('resumeCount')+1)
+            getApp().globalData.resumeCount+=1;
             console.log(res.data.data[0]);
-            var isVip = res.data.vip.vip
+            var isVip = wx.getStorageSync('isVip');
             console.log(isVip)
-            if(isVip==0){
+            if(isVip!=1){
               res.data.data[0].name='**';
               res.data.data[0].phone_number='**';
             }

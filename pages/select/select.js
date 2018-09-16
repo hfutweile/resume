@@ -1,6 +1,5 @@
 Page({
   data: {
-    openid:null,
     inputShowed: false,
     inputVal: "",
     resume:[],
@@ -68,11 +67,9 @@ Page({
     //根据用户nickname获取可访问的简历
     var app = getApp();//取得全局App({..})实例
     var userInfo = app.globalData.userInfo;//取得全局变量需要的值
-    var openid = wx.getStorageSync('openid')
-    console.log('select storage page openid:' + openid)
     var that=this;
     wx.request({
-      url: wx.getStorageSync('url') +'getResume',
+      url: getApp().globalData.url +'getResume',
       data:{
         openid: wx.getStorageSync('openid')
       },
@@ -81,11 +78,11 @@ Page({
       success: function (res) {
         if (res.statusCode == 200)
         {
-          wx.setStorageSync('resumeCount', 0);
+          getApp().globalData.resumeCount=0;
           var isVip = wx.getStorageSync('isVip');
+          console.log(isVip)
           //判断是不是vip，不是的话，隐藏电话号码信息，暂时未完成
           var Resume=res.data.data
-          console.log(Resume)
           if(isVip!=1){
             for (var i = 0; i < Resume.length; i++) {
               Resume[i].tel = "**";
@@ -130,12 +127,10 @@ Page({
   //通过下拉框的条件搜索
   getResumeByTerm:function()
   {
-    var app = getApp();//取得全局App({..})实例
-    app.globalData.resumeCount=0;//取得全局变量需要的值
+    getApp().globalData.resumeCount=0;//取得全局变量需要的值
     var that=this;
       wx.request({
-        url: wx.getStorageSync('url') +'getByTerm',
-        //url: 'https://www.yeahempire.com/getResumeByTerm',
+        url: getApp().globalData.url +'getByTerm',
         data:{
           openid:wx.getStorageSync('openid'),
           industry:this.data.hyid,
@@ -147,7 +142,7 @@ Page({
         header: { "Content-Type": "application/x-www-form-urlencoded" },
         success: function (res) {
           if (res.statusCode == 200) {
-            wx.setStorageSync('resumeCount', 0);
+            getApp().globalData.resumeCount=0;
             var isVip = wx.getStorageSync('isVip');
             //判断是不是vip，不是的话，隐藏电话号码信息，暂时未完成
             var Resume = res.data.data
@@ -155,7 +150,6 @@ Page({
             {
               for (var i = 0; i < Resume.length; i++) {
                 Resume[i].phone_number = "**";
-                //Resume[i].gangwei = "**";
               }
             }
             that.setData({
@@ -172,12 +166,10 @@ Page({
   //通过搜索输入框搜索
   getResumeByQuery :function()
   {
-    var app = getApp();//取得全局App({..})实例
-    app.globalData.resumeCount = 0;//取得全局变量需要的值
+    getApp().globalData.resumeCount = 0;//取得全局变量需要的值
     var that = this;
       wx.request({
-        url: wx.getStorageSync('url') +'getByQuery',
-        //url: 'https://www.yeahempire.com/getResumeByQuery',
+        url: getApp().globalData.url +'getByQuery',
         data:{
           openid: wx.getStorageSync('openid'),
           query: this.data.inputVal
@@ -186,7 +178,7 @@ Page({
         header: { "Content-Type": "application/x-www-form-urlencoded" },
         success: function (res) {
           if (res.statusCode == 200) {
-            wx.setStorageSync('resumeCount', 0);
+            getApp().globalData.resumeCount=0;
             var isVip = wx.getStorageSync('isVip');
             //判断是不是vip，不是的话，隐藏电话号码信息，暂时未完成
             var Resume = res.data.data
@@ -194,7 +186,6 @@ Page({
             {
               for (var i = 0; i < Resume.length; i++) {
                 Resume[i].phone_number = "**";
-                //Resume[i].gangwei = "**";
               }
             }
             that.setData({
@@ -206,7 +197,7 @@ Page({
   },
   previewTodetail :function(e)
   {
-    if (wx.getStorageSync('resumeCount')>=50)
+    if (getApp().globalData.resumeCount>=50)
     {
       wx.navigateTo({
         url: '../select/select',
