@@ -71,7 +71,7 @@ https://www.jianshu.com/p/f82262002f8a
   </view>
   <view class="page__title">请您编辑以下资料</view>
   <view class='editmsg'>
-    <view class='biaoqian' style='border-bottom: 1rpx solid #3367D6;'>
+    <view class='biaoqian' style='border-bottom: 1rpx solid #FF6633;'>
 
       <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
 
@@ -95,7 +95,7 @@ https://www.jianshu.com/p/f82262002f8a
         </view>
       </view>
     </view>
-    <view class='highsalary'  style='border-bottom: 1rpx solid #3367D6;'>
+    <view class='highsalary'  style='border-bottom: 1rpx solid #FF6633;'>
       <view class="weui-cell">
         <view class="section">
 
@@ -119,7 +119,7 @@ https://www.jianshu.com/p/f82262002f8a
 
     </view>
 
-    <view class='lowsalary'  style='border-bottom: 1rpx solid #3367D6;'>
+    <view class='lowsalary'  style='border-bottom: 1rpx solid #FF6633;'>
       <view class="weui-cell">
         <view class="section">
         
@@ -143,7 +143,7 @@ https://www.jianshu.com/p/f82262002f8a
 
 
     </view>
-    <view class='zaizhi'  style='border-bottom: 1rpx solid #3367D6;'>
+    <view class='zaizhi'  style='border-bottom: 1rpx solid #FF6633;'>
       <view class="weui-cell">
         <view class="section">
 
@@ -169,7 +169,7 @@ https://www.jianshu.com/p/f82262002f8a
 
 
     <!-- 最近工作岗位 -->
-    <view class='gangwei'  style='border-bottom: 1rpx solid #3367D6;'>
+    <view class='gangwei'  style='border-bottom: 1rpx solid #FF6633;'>
           <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__bd">
@@ -188,7 +188,7 @@ https://www.jianshu.com/p/f82262002f8a
 
     <!-- 联系结果 -->
     
-    <view class='lianxijieguo'  style='border-bottom: 1rpx solid #3367D6;'>
+    <view class='lianxijieguo'  style='border-bottom: 1rpx solid #FF6633;'>
       <view class="weui-cell">
         <view class="section">
 
@@ -214,7 +214,7 @@ https://www.jianshu.com/p/f82262002f8a
 
     </view>
 <!-- 评价 -->
-<view style='border-bottom: 1rpx solid #3367D6;'>
+<view style='border-bottom: 1rpx solid #FF6633;'>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
           <view class="weui-cell__bd">

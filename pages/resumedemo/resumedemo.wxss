@@ -25,7 +25,7 @@
 }
 .usermotto {
 
-  background-color:  rgb(51, 103, 214);
+  background-color:  #FF6633;
   color: white;
 }
 .editmsg{
