@@ -104,7 +104,7 @@
     opacity: .5;
 }
 .nav-son.active .content{
-    color: #FF6633
+    color: #FF6633;
 }
 .nav-son.active .icon{
     border-bottom: 4px solid #FF6633;

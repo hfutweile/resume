@@ -9,6 +9,7 @@ Page({
     nl: [],
     xl: [],
 
+
     hyopen: false,
     xbopen: false,
     nlopen: false,
@@ -25,44 +26,89 @@ Page({
     xbid:-1,
     nlid:-1,
     xlid:-1,
+    xbChecked:false,
+    nlChecked:false,
+    xlChecked:false,
+    hyChecked:false,
+    xbindex:0,
+    xb: ['不限', '     男 ', ' 女 ',],
+    nlindex:0,
+    nl:[' 不限', 
+         '20-30岁' ,
+         '30-40岁' ,
+  '40-50岁' ,
+  '50-60岁' ,
+   '60岁以上' ],
+   xlindex:0,
+    xl: ['不限' ,
+       '专科',
+      '本科' ,
+       '研究生' ,
+       '博士生', ],
+       hyindex:0,
+       hy:[
+        '不限' ,
+          '销售/客服/营销' ,
+          '财务' ,
+         '人力资源/行政后勤',
+          'IT/互联网/通信' ,
+         '房地产/物业' ,
+          '建筑' ,
+          '金融' ,
+        '交通/物流' ,
+          '生产/制造' ,
+         '传媒/设计/推广' ,
+          '教育/翻译' ,
+          '法律' ,
+          '商场/服务/收银' ,
+         '能源/环保/农业' ,
+          '医药' ,
+       '酒店/餐饮/快消' ,
+          '普工',
+          '兼职/实习' ,
+         '其他' ,
+       ],
+
   },
   onLoad: function() {
     this.setData({
-      hy: [{ name: '不限' },
-      {name:'销售/客服/营销'},
-      {name: '财务'},
-      {name: '人力资源/行政后勤'},
-      {name: 'IT/互联网/通信'},
-      {name: '房地产/物业'},
-      {name: '建筑'},
-        { name: '金融' },
-        { name: '交通/物流' },
-        { name: '生产/制造' },
-        { name: '传媒/设计/推广' },
-        { name: '教育/翻译' },
-        { name: '法律' },
-        { name: '商场/服务/收银' },
-        { name: '能源/环保/农业' },
-        { name: '医药' },
-        { name: '酒店/餐饮/快消' },
-        { name: '普工' },
-        { name: '兼职/实习' },
-      {name:'其他'},],
-      xb: [{ name: '不限' }, { name: '男' },
-        { name: '女' },],
-      nl: [
-        {name:'不限'}, 
-        { name: '20-30岁' },
-        { name: '30-40岁' },
-        { name: '40-50岁' },
-        { name: '50-60岁' },
-        { name: '60岁以上' },],
-      xl: [
-        {name:'不限'}, 
-        {name:'专科'},
-        {name:'本科'},
-        {name:'研究生'},
-        {name: '博士生'},]
+      // hy: [{ name: '不限' },
+      // {name:'销售/客服/营销'},
+      // {name: '财务'},
+      // {name: '人力资源/行政后勤'},
+      // {name: 'IT/互联网/通信'},
+      // {name: '房地产/物业'},
+      // {name: '建筑'},
+      //   { name: '金融' },
+      //   { name: '交通/物流' },
+      //   { name: '生产/制造' },
+      //   { name: '传媒/设计/推广' },
+      //   { name: '教育/翻译' },
+      //   { name: '法律' },
+      //   { name: '商场/服务/收银' },
+      //   { name: '能源/环保/农业' },
+      //   { name: '医药' },
+      //   { name: '酒店/餐饮/快消' },
+      //   { name: '普工' },
+      //   { name: '兼职/实习' },
+      // {name:'其他'},],
+      // xb: [{ name: '不限' }, { name: '男 ' },
+      //   { name: '女 ' },],
+
+      
+      // nl: [
+      //   {name:'不限'}, 
+      //   { name: '20-30岁' },
+      //   { name: '30-40岁' },
+      //   { name: '40-50岁' },
+      //   { name: '50-60岁' },
+      //   { name: '60岁以上' },],
+      // xl: [
+      //   {name:'不限'}, 
+      //   {name:'专科'},
+      //   {name:'本科'},
+      //   {name:'研究生'},
+      //   {name: '博士生'},]
     })
     //根据用户nickname获取可访问的简历
     var app = getApp();//取得全局App({..})实例
@@ -95,7 +141,20 @@ Page({
       }
     })
   },
+  bindPickerChangeXB: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      xbindex: e.detail.value
+   
+    })
+  },
 
+    bindPickerChangeNL: function (e) {
+      console.log('picker发送选择改变，携带值为', e.detail.value)
+      this.setData({
+        nlindex: e.detail.value
+      })
+    },
   tagChoosehy: function (e) {
     var ids = e.currentTarget.dataset.id;  //获取自定义的id   
     this.setData({
@@ -211,132 +270,151 @@ Page({
     }
   },
 
-listhy: function(e) {
-  if (this.data.hyopen) {
-    this.setData({
-      hyopen: false,
-      xbopen: false,
-      nlopen: false,
-      xlopen: false,
-      hyshow: true,
-      xbshow: true,
-      nlshow: true,
-      xlshow: true,
-      isfull: false,
-      shownavindex: 0
-    })
-  } else {
-    this.setData({
-      content: this.data.hy,
-      hyopen: true,
-      xbopen: false,
-      nlopen: false,
-      xlopen: false,
-      hyshow: false,
-      xbshow: true,
-      nlshow: true,
-      xlshow: true,
-      isfull: true,
-      shownavindex: e.currentTarget.dataset.nav
-    })
-  }
+// listhy: function(e) {
+//   if (this.data.hyopen) {
+//     this.setData({
+//       hyopen: false,
+//       xbopen: false,
+//       nlopen: false,
+//       xlopen: false,
+//       hyshow: true,
+//       xbshow: true,
+//       nlshow: true,
+//       xlshow: true,
+//       isfull: false,
+//       shownavindex: 0
+//     })
+//   } else {
+//     this.setData({
+//       content: this.data.hy,
+//       hyopen: true,
+//       xbopen: false,
+//       nlopen: false,
+//       xlopen: false,
+//       hyshow: false,
+//       xbshow: true,
+//       nlshow: true,
+//       xlshow: true,
+//       isfull: true,
+//       shownavindex: e.currentTarget.dataset.nav
+//     })
+//   }
+// },
+
+listxb:function(e){
+  this.setData({
+    xbChecked:true
+  })
 },
+  listnl: function (e) {
+    this.setData({
+      nlChecked:true
+    })
+  },
+  listxl: function (e) {
+    this.setData({
+      xlChecked:true
+    })
+  },
+  listhy: function (e) {
+    this.setData({
+      hyChecked: true
+    })
+  },
+// listxb: function(e) {
+//   if (this.data.xbopen) {
+//     this.setData({
+//       hyopen: false,
+//       xbopen: false,
+//       nlopen: false,
+//       xlopen: false,
+//       hyshow: true,
+//       xbshow: true,
+//       nlshow: true,
+//       xlshow: true,
+//       isfull: false,
+//       shownavindex: 0
+//     })
+//   } else {
+//     this.setData({
+//       content: this.data.xb,
+//       hyopen: false,
+//       xbopen: true,
+//       nlopen: false,
+//       xlopen: false,
+//       hyshow: true,
+//       xbshow: false,
+//       nlshow: true,
+//       xlshow: true,
+//       isfull: true,
+//       shownavindex: e.currentTarget.dataset.nav
+//     })
+//   }
+// },
+
+// listnl: function(e) {
+//   if (this.data.nlopen) {
+//     this.setData({
+//       hyopen: false,
+//       xbopen: false,
+//       nlopen: false,
+//       xlopen: false,
+//       hyshow: true,
+//       xbshow: true,
+//       nlshow: true,
+//       xlshow: true,
+//       isfull: false,
+//       shownavindex: 0
+//     })
+//   } else {
+//     this.setData({
+//       content: this.data.nl,
+//       hyopen: false,
+//       xbopen: false,
+//       nlopen: true,
+//       xlopen: false,
+//       hyshow: true,
+//       xbshow: true,
+//       nlshow: false,
+//       xlshow: true,
+//       isfull: true,
+//       shownavindex: e.currentTarget.dataset.nav
+//     })
+//   }
+// },
 
 
-listxb: function(e) {
-  if (this.data.xbopen) {
-    this.setData({
-      hyopen: false,
-      xbopen: false,
-      nlopen: false,
-      xlopen: false,
-      hyshow: true,
-      xbshow: true,
-      nlshow: true,
-      xlshow: true,
-      isfull: false,
-      shownavindex: 0
-    })
-  } else {
-    this.setData({
-      content: this.data.xb,
-      hyopen: false,
-      xbopen: true,
-      nlopen: false,
-      xlopen: false,
-      hyshow: true,
-      xbshow: false,
-      nlshow: true,
-      xlshow: true,
-      isfull: true,
-      shownavindex: e.currentTarget.dataset.nav
-    })
-  }
-},
+// listxl: function(e) {
+//   if (this.data.xlopen) {
+//     this.setData({
 
-listnl: function(e) {
-  if (this.data.nlopen) {
-    this.setData({
-      hyopen: false,
-      xbopen: false,
-      nlopen: false,
-      xlopen: false,
-      hyshow: true,
-      xbshow: true,
-      nlshow: true,
-      xlshow: true,
-      isfull: false,
-      shownavindex: 0
-    })
-  } else {
-    this.setData({
-      content: this.data.nl,
-      hyopen: false,
-      xbopen: false,
-      nlopen: true,
-      xlopen: false,
-      hyshow: true,
-      xbshow: true,
-      nlshow: false,
-      xlshow: true,
-      isfull: true,
-      shownavindex: e.currentTarget.dataset.nav
-    })
-  }
-},
-
-
-listxl: function(e) {
-  if (this.data.xlopen) {
-    this.setData({
-
-      hyopen: false,
-      xbopen: false,
-      nlopen: false,
-      xlopen: false,
-      hyshow: true,
-      xbshow: true,
-      nlshow: true,
-      xlshow: true,
-      isfull: false,
-      shownavindex: 0
-    })
-  } else {
-    this.setData({
-      content: this.data.xl,
-      hyopen: false,
-      xbopen: false,
-      nlopen: false,
-      xlopen: true,
-      hyshow: true,
-      xbshow: true,
-      nlshow: true,
-      xlshow: false,
-      isfull: true,
-      shownavindex: e.currentTarget.dataset.nav
-    })
-  }
-},
+//       hyopen: false,
+//       xbopen: false,
+//       nlopen: false,
+//       xlopen: false,
+//       hyshow: true,
+//       xbshow: true,
+//       nlshow: true,
+//       xlshow: true,
+//       isfull: false,
+//       shownavindex: 0
+//     })
+//   } else {
+//     this.setData({
+//       content: this.data.xl,
+//       hyopen: false,
+//       xbopen: false,
+//       nlopen: false,
+//       xlopen: true,
+//       hyshow: true,
+//       xbshow: true,
+//       nlshow: true,
+//       xlshow: false,
+//       isfull: true,
+//       shownavindex: e.currentTarget.dataset.nav
+//     })
+//   }
+// },
 
 
 hidebg: function(e) {

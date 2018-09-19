@@ -12,7 +12,7 @@
         </view>
         <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
           <icon class="weui-icon-search" type="search" size="14"></icon>
-          <view class="weui-search-bar__text">搜索</view>
+          <view class="weui-search-bar__text">请输入简历编号或岗位名称</view>
         </label>
       </view>
       <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
@@ -23,30 +23,58 @@
 
   </view>
 
-  <view class="nav">
+ <view class="nav">
 
-    <view class="nav-son borders {{shownavindex == 1? 'active' : ''}}" bindtap="listhy" data-nav="1">
-      <view class="content">行业</view>
-      <view class="icon"></view>
-    </view>
-    <view class="nav-son {{shownavindex == 2? 'active' : ''}}" bindtap="listxb" data-nav="2">
+
+<picker bindchange="bindPickerChangeXB" value="{{xbindex}} "range='{{xb}}'  >
+<view class='picker'>
+    <view class="nav-son borders {{xbChecked? 'active' : ''}}" bindtap="listxb" data-nav="1" style='width:150rpx'>
       <view class="content">性别</view>
       <view class="icon"></view>
+     
     </view>
-    <view class="nav-son borders {{shownavindex == 3? 'active' : ''}}" bindtap="listnl" data-nav="3">
+    </view>
+</picker>
+
+<picker bindchange="bindPickerChangeNL" value="{{nlindex}} "range='{{nl}}'  >
+<view class='picker'>
+    <view class="nav-son borders {{nlChecked? 'active' : ''}}" bindtap="listnl" data-nav="2" style='width:150rpx'>
       <view class="content">年龄</view>
       <view class="icon"></view>
+     
     </view>
-    <view class="nav-son borders {{shownavindex == 4? 'active' : ''}}" bindtap="listxl" data-nav="4">
+    </view>
+</picker>
+<picker bindchange="bindPickerChangeXL" value="{{xlindex}} "range='{{xl}}'  >
+<view class='picker'>
+    <view class="nav-son borders {{xlChecked? 'active' : ''}}" bindtap="listxl" data-nav="3" style='width:150rpx'>
       <view class="content">学历</view>
       <view class="icon"></view>
+     
     </view>
-    <view class="nav-son borders " bindtap="getResumeByTerm" data-nav="">
-      <view class="content">搜索</view>
+    </view>
+</picker>
+<picker bindchange="bindPickerChangeHY" value="{{hyindex}} "range='{{hy}}'  >
+<view class='picker'>
+    <view class="nav-son borders {{hyChecked? 'active' : ''}}" bindtap="listhy" data-nav="4" style='width:150rpx'>
+      <view class="content">行业</view>
+      <view class="icon"></view>
+     
+    </view>
+    </view>
+</picker>
+
+   
+    <!-- <view class="nav-son borders {{shownavindex == 4? 'active' : ''}}" bindtap="listxl" data-nav="4">
+      <view class="content">学历</view>
+      <view class="icon"></view>
+    </view> -->
+    <view class="nav-son borders " bindtap="getResumeByTerm" data-nav="" style='color:#FF6633'>
+      <view class="content" >搜索</view>
 
     </view>
   </view>
-
+ <!-- 
   <view class="temp temp1 {{hyopen ? 'slidown' : 'slidup'}} {{hyshow ? 'disappear':''}}">
     <view wx:for="{{content}}">
        <view class=" " data-id="{{index}}" bindtap="tagChoosehy">
@@ -74,7 +102,7 @@
                    <text style="{{index == id?'color:#FF6633':'color:gray'}}">{{item.name}}</text>
       </view>
     </view>
-  </view>
+  </view> -->
 
 <!-- <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg"></view>  -->
 
@@ -92,5 +120,6 @@
     </view>
 </block>
 </view>
+
 
 </view>
