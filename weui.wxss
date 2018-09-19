@@ -925,6 +925,7 @@ icon {
 .weui-media-box {
   padding: 15px;
   position: relative;
+
 }
 
 .weui-media-box:before {

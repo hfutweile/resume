@@ -13,11 +13,12 @@
     background: #fff;
     overflow: hidden;
 }
-.page__bd{
-  z-index: 100;
+.weui-media-box-my{
   position: relative;
-  display:block;
+  padding: 10px;
+
 }
+
 .nav{
     position: relative;
     z-index: 99;
@@ -155,7 +156,7 @@
   font-size: 15px;
   width: auto;
   color: #999;
-  float: left;
+
   margin-right: 20px;
 }
 .weui-media-box__right{
