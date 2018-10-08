@@ -126,3 +126,11 @@ def getResumeById(request):
                 return JsonResponse({'success':False,'data':str(e)})
         else:
             return JsonResponse({'success':False,'data':'没有数据'})
+
+
+url:https://www.yeahempire.com:8088/getOpenid
+函数名：getOpenid
+函数功能：根据小程序APPID和APPsecret获取openid
+参数：appID,appSecret,code:code
+返回参数：openId
+获取openid的url：url: 'https://api.weixin.qq.com/sns/jscode2session?appid="+"appid+"&secret="+appSecret"+&js_code=' + code + '&grant_type=authorization_code'

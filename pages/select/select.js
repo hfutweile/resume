@@ -132,6 +132,7 @@ Page({
           if(isVip!=1){
             for (var i = 0; i < Resume.length; i++) {
               Resume[i].tel = "**";
+              Resume[i].name = "**";
             }
           }
           that.setData({

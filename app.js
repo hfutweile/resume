@@ -6,17 +6,24 @@ App({
       //获取code
       success: function (res) {
         var code = res.code; //返回code
-        var appId = 'wx742e2f5709ad09cc';
-        var secret = 'f9cd5a33ef546520b4ff14c8642ec8b9';
+        console.log(code);
+        var appId = 'wx23808f489a86950b';
+        var secret = '7ec544e09d72c5d6fc348a542c3107e6';
         var that = this;
+        //从后台获取openid
         wx.request({
-          url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appId + '&secret=' + secret + '&js_code=' + code + '&grant_type=authorization_code',
-          data: {},
+          url: getApp().globalData.url+"getopenid",
+          data:{
+            appID:appId, 
+            appSecret:secret, 
+            code:code
+          },
           header: {
             'content-type': 'json'
           },
           success: function (res) {
             if (res.statusCode == 200) {
+              console.log(res.data);
               wx.setStorageSync('openid', res.data.openid)
               //判断用户是否是vip
               wx.request({
@@ -63,7 +70,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    url: 'http://www.yeahempire.com:8088/xiaomai/',
+    url: 'https://www.yeahempire.com/xiaomai/',
     resumeCount:0,
   }
 })
